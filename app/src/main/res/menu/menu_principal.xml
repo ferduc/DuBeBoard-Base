@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.dubeboard.dubeboard.Principal">
+    <item
+        android:id="@+id/opciongrabar"
+        android:orderInCategory="100"
+        android:title="Grabar"
+        app:showAsAction="never" />
+</menu>
