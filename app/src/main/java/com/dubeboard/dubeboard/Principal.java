@@ -1,9 +1,9 @@
 package com.dubeboard.dubeboard;
 
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,31 +26,70 @@ public class Principal extends AppCompatActivity implements
         Fragment_Verbos.OnFragmentInteractionListener, Fragment_cocina.OnFragmentInteractionListener, Fragment_comida.OnFragmentInteractionListener,
         Fragment_postres.OnFragmentInteractionListener, Fragment_parCuerpo.OnFragmentInteractionListener, Fragment_hogar.OnFragmentInteractionListener,
         fragment_transporte.OnFragmentInteractionListener, Fragment_prendas.OnFragmentInteractionListener, Fragment_escuela.OnFragmentInteractionListener,
-        Fragment_lugares.OnFragmentInteractionListener,
+        Fragment_lugares.OnFragmentInteractionListener, Fragment_animales.OnFragmentInteractionListener,
         //LLAMADA A COMUNICADOR
         Fragmentuno.Comunicador, Fragmentdos.Comunicador, Fragment_cocina.Comunicador, Fragment_comida.Comunicador, Fragment_cosas.Comunicador,
         Fragment_escuela.Comunicador, Fragment_hogar.Comunicador, Fragment_lugares.Comunicador, Fragment_parCuerpo.Comunicador, Fragment_postres.Comunicador,
-        Fragment_prendas.Comunicador, fragment_transporte.Comunicador, Fragment_Verbos.Comunicador {
+        Fragment_prendas.Comunicador, fragment_transporte.Comunicador, Fragment_Verbos.Comunicador, Fragmentuno.Comunicador2, Fragment_animales.Comunicador{
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-
+    private MediaPlayer mp;
+    String nuevorecibirtexto;
+    private MediaPlayer nuevomp = null;
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
 
+    AdaptadorDeImagenes adapter;
+
     private ListView lista;
     TextView recibirtexto;
-    private String datos[] = {
-            "PRONOMBRES", "FAMILIA", "COSAS",
-            "VERBOS", "COCINA", "COMIDA",
-            "POSTRES", "PARTES DEL CUERPO",
-            "HOGAR", "TRANSPORTE",
-            "PRENDAS DE VESTIR", "ESCUELA","LUGARES"
+    Button boton_borrar;
+    Button boton_reproducir;
+
+    String[] titulo = new String[]{
+            "PRONOMBRES",
+            "FAMILIA",
+            "COSAS",
+            "VERBOS",
+            "COCINA",
+            "COMIDA",
+            "POSTRES",
+            "PARTES DEL CUERPO",
+            "HOGAR",
+            "TRANSPORTE",
+            "PRENDAS DE VESTIR",
+            "ESCUELA",
+            "LUGARES",
+            "ANIMALES"
     };
+
+    int[] imagenes = {
+            R.drawable.pronombres,
+            R.drawable.family,
+            R.drawable.cosas,
+            R.drawable.verbos,
+            R.drawable.cocina,
+            R.drawable.comida,
+            R.drawable.postretorta,
+            R.drawable.cuerpo,
+            R.drawable.casahogar,
+            R.drawable.transporte,
+            R.drawable.ropa,
+            R.drawable.escuelaprincipal,
+            R.drawable.lugar,
+            R.drawable.animales
+
+    };
+
+    @Override
+    public void mediaplay(MediaPlayer mp) {
+        nuevomp = mp;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +113,15 @@ public class Principal extends AppCompatActivity implements
         final Fragment_prendas fragment_prendas = new Fragment_prendas();
         final Fragment_escuela fragment_escuela = new Fragment_escuela();
         final Fragment_lugares fragment_lugares = new Fragment_lugares();
+        final Fragment_animales fragment_animales = new Fragment_animales();
 
         //TextView
         recibirtexto = (TextView) findViewById(R.id.txtrecibirtexto);
 
         //LISTVIEW
         lista = (ListView) findViewById(R.id.Lista);
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, datos);
-        lista.setAdapter(adaptador);
+        adapter = new AdaptadorDeImagenes(this,titulo,imagenes);
+        lista.setAdapter(adapter);
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -95,35 +135,53 @@ public class Principal extends AppCompatActivity implements
                     FT.replace(R.id.framefragmentos, fragment);
                 } else if (position == 1) {
                     FT.replace(R.id.framefragmentos, fragment1);
-                } else if (position == 2){
+                } else if (position == 2) {
                     FT.replace(R.id.framefragmentos, fragment_cosas);
-                } else if (position == 3){
+                } else if (position == 3) {
                     FT.replace(R.id.framefragmentos, fragment_verbos);
-                } else if (position == 4){
+                } else if (position == 4) {
                     FT.replace(R.id.framefragmentos, fragment_cocina);
-                } else if (position == 5){
+                } else if (position == 5) {
                     FT.replace(R.id.framefragmentos, fragment_comida);
-                } else if (position == 6){
+                } else if (position == 6) {
                     FT.replace(R.id.framefragmentos, fragment_postres);
-                } else if (position == 7){
+                } else if (position == 7) {
                     FT.replace(R.id.framefragmentos, fragment_parCuerpo);
-                } else if (position == 8){
+                } else if (position == 8) {
                     FT.replace(R.id.framefragmentos, fragment_hogar);
-                } else if (position == 9){
+                } else if (position == 9) {
                     FT.replace(R.id.framefragmentos, fragment_transporte);
-                } else if (position == 10){
+                } else if (position == 10) {
                     FT.replace(R.id.framefragmentos, fragment_prendas);
-                } else if (position == 11){
+                } else if (position == 11) {
                     FT.replace(R.id.framefragmentos, fragment_escuela);
-                } else if (position == 12){
+                } else if (position == 12) {
                     FT.replace(R.id.framefragmentos, fragment_lugares);
+                } else if (position == 13){
+                    FT.replace(R.id.framefragmentos, fragment_animales);
                 }
                 //Paso4: Confirmar el cambio
-                FT.addToBackStack(null);
+                //FT.addToBackStack(null);
                 FT.commit();
             }
         });
 
+        boton_borrar=(Button)findViewById(R.id.btn_borrar);
+        boton_borrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recibirtexto.setText(" ");
+                nuevomp = null;
+            }
+        });
+
+        boton_reproducir=(Button) findViewById(R.id.btn_reproducir);
+        boton_reproducir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nuevomp.start();
+            }
+        });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -145,7 +203,9 @@ public class Principal extends AppCompatActivity implements
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.opciongrabar) {
-            return true;
+            //Envia a la ventanagrabar
+            Intent i= new Intent(getApplicationContext(),Grabar.class);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);
@@ -196,7 +256,9 @@ public class Principal extends AppCompatActivity implements
     public void enviar(String envia) {
 
         String e = envia;
-        String  nuevorecibirtexto = recibirtexto.getText().toString();
-        recibirtexto.setText(nuevorecibirtexto+" "+e);
+        nuevorecibirtexto = recibirtexto.getText().toString();
+        recibirtexto.setText(nuevorecibirtexto + " " + e);
     }
+
+
 }

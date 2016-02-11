@@ -33,7 +33,10 @@ public class Fragment_cosas extends Fragment {
             "RADIO",
             "TELEVISOR",
             "BOTELLA",
-            "SILLA DE RUEDAS"
+            "SILLA DE RUEDAS",
+            "COMPUTADOR",
+            "TABLET",
+            "DESODORANTE"
     };
 
     int[] imagenes = {
@@ -46,7 +49,10 @@ public class Fragment_cosas extends Fragment {
             R.drawable.radio,
             R.drawable.televisor,
             R.drawable.botella,
-            R.drawable.silla_de_ruedas
+            R.drawable.silla_de_ruedas,
+            R.drawable.computador,
+            R.drawable.tablet,
+            R.drawable.desodorante
     };
 
     public Fragment_cosas() {
@@ -94,6 +100,12 @@ public class Fragment_cosas extends Fragment {
                     comunicador.enviar("botella");
                 }else if(pos == 9){
                     comunicador.enviar("silla de ruedas");
+                }else if(pos == 10){
+                    comunicador.enviar("computador");
+                }else if(pos == 11){
+                    comunicador.enviar("tablet");
+                }else if(pos == 12){
+                    comunicador.enviar("desodorante");
                 }
             }
         });

@@ -29,9 +29,13 @@ public class fragment_transporte extends Fragment {
             "BUS",
             "AVION",
             "TREN",
-            "CAMION"
-
-
+            "CAMION",
+            "HEPLICOPTERO",
+            "BICICLETA",
+            "BOTE",
+            "BARCO",
+            "MOTOCICLETA",
+            "AMBULANCIA"
     };
 
     int[] imagenes = {
@@ -39,7 +43,13 @@ public class fragment_transporte extends Fragment {
             R.drawable.bus,
             R.drawable.avion,
             R.drawable.tren,
-            R.drawable.camion
+            R.drawable.camion,
+            R.drawable.helicoptero,
+            R.drawable.bicicleta,
+            R.drawable.bote,
+            R.drawable.barco,
+            R.drawable.motocicleta,
+            R.drawable.ambulancia
     };
 
     public fragment_transporte() {
@@ -73,9 +83,20 @@ public class fragment_transporte extends Fragment {
                     comunicador.enviar("avión");
                 }else if(pos == 3){
                     comunicador.enviar("tren");
-                }
-                else if(pos == 4){
+                }else if(pos == 4){
                     comunicador.enviar("camión");
+                }else if(pos == 5){
+                    comunicador.enviar("helicóptero");
+                }else if(pos == 6){
+                    comunicador.enviar("bicicleta");
+                }else if(pos == 7){
+                    comunicador.enviar("bote");
+                }else if(pos == 8){
+                    comunicador.enviar("barco");
+                }else if(pos == 9){
+                    comunicador.enviar("motocicleta");
+                }else if(pos == 10){
+                    comunicador.enviar("ambulancia");
                 }
             }
         });

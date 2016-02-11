@@ -28,15 +28,30 @@ public class Fragment_lugares extends Fragment {
             "BOSQUE",
             "PLAYA",
             "CINE",
-            "TIENDA"
-
+            "TIENDA",
+            "PARQUE",
+            "ZOOLOGICO",
+            "PARQUE DE DIVERSIONES",
+            "SUPERMERCADO",
+            "PANADERIA",
+            "RESTAURANTE",
+            "FARMACIA",
+            "HOSPITAL"
     };
 
     int[] imagenes = {
             R.drawable.bosque,
             R.drawable.playa,
             R.drawable.cine,
-            R.drawable.tienda
+            R.drawable.tienda,
+            R.drawable.parque,
+            R.drawable.zoo,
+            R.drawable.pardediversiones,
+            R.drawable.supermercado,
+            R.drawable.panaderia,
+            R.drawable.restaurant,
+            R.drawable.farmacia,
+            R.drawable.hospital
     };
 
 
@@ -71,6 +86,22 @@ public class Fragment_lugares extends Fragment {
                     comunicador.enviar("cine");
                 }else if(pos == 3){
                     comunicador.enviar("tienda");
+                }else if(pos == 4){
+                    comunicador.enviar("parque");
+                }else if(pos == 5){
+                    comunicador.enviar("zoológico");
+                }else if(pos == 6){
+                    comunicador.enviar("parque de diversiones");
+                }else if(pos == 7){
+                    comunicador.enviar("supermercado");
+                }else if(pos == 8){
+                    comunicador.enviar("panadería");
+                }else if(pos == 9){
+                    comunicador.enviar("restaurante");
+                }else if(pos == 10){
+                    comunicador.enviar("farmacia");
+                }else if(pos == 11){
+                    comunicador.enviar("hospital");
                 }
             }
         });

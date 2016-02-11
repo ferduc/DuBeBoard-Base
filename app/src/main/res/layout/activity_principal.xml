@@ -30,16 +30,38 @@
         android:background="#ffffff">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="148dp"
+            android:layout_height="92dp"
             android:id="@+id/frame_texto">
 
             <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="103dp"
                 android:id="@+id/txtrecibirtexto"
-                android:textSize="24dp" />
+                android:textSize="24dp"
+                android:background="#f0eded" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:background="#d6d3d3">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="Borrar"
+                android:id="@+id/btn_borrar"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="REPRODUCIR"
+                android:id="@+id/btn_reproducir" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,7 +86,9 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/framefragmentos">
+                android:id="@+id/framefragmentos"
+                android:background="@drawable/fondo"
+                android:focusable="true">
 
             </LinearLayout>
         </LinearLayout>

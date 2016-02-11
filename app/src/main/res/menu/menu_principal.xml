@@ -5,6 +5,7 @@
     <item
         android:id="@+id/opciongrabar"
         android:orderInCategory="100"
+        android:icon="@drawable/ic_action_name"
         android:title="Grabar"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 </menu>

@@ -38,9 +38,10 @@ public class Fragmentdos extends Fragment {
             "MAESTRO",
             "MAESTRA",
             "FAMILIA",
-            "PERRO",
-            "GATO",
-            "DOCTOR"
+            "DOCTOR",
+            "MAMÁ",
+            "HERMANO",
+            "HERMANA"
     };
 
     int[] imagenes = {
@@ -52,9 +53,10 @@ public class Fragmentdos extends Fragment {
             R.drawable.profesor,
             R.drawable.profesora,
             R.drawable.familia,
-            R.drawable.perro,
-            R.drawable.gato,
             R.drawable.doctor,
+            R.drawable.mam,
+            R.drawable.hermano,
+            R.drawable.hermana
     };
 
     public Fragmentdos() {
@@ -97,11 +99,13 @@ public class Fragmentdos extends Fragment {
                 }else if(pos == 7){
                     comunicador.enviar("familia");
                 }else if(pos == 8){
-                    comunicador.enviar("perro");
-                }else if(pos == 9){
-                    comunicador.enviar("gato");
-                }else if(pos == 10){
                     comunicador.enviar("doctor");
+                }else if(pos == 9){
+                    comunicador.enviar("mamá");
+                }else if(pos == 10){
+                    comunicador.enviar("hermano");
+                }else if(pos == 11){
+                    comunicador.enviar("hermana");
                 }
             }
         });

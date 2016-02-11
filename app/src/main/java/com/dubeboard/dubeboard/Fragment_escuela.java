@@ -36,7 +36,8 @@ public class Fragment_escuela extends Fragment {
             "CUADERNO",
             "PIZARRON",
             "TIJERAS",
-            "MOCHILA"
+            "MOCHILA",
+            "GOMA"
     };
 
     int[] imagenes = {
@@ -51,7 +52,8 @@ public class Fragment_escuela extends Fragment {
             R.drawable.cuaderno,
             R.drawable.pizarron,
             R.drawable.tijeras,
-            R.drawable.mochila
+            R.drawable.mochila,
+            R.drawable.goma
     };
 
     public Fragment_escuela() {
@@ -102,6 +104,8 @@ public class Fragment_escuela extends Fragment {
                     comunicador.enviar("tijeras");
                 }else if(pos == 11){
                     comunicador.enviar("mochila");
+                }else if(pos == 12){
+                    comunicador.enviar("goma");
                 }
             }
         });

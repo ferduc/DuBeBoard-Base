@@ -35,7 +35,6 @@ public class Fragment_prendas extends Fragment {
             "ZAPATO DEPORTIVO",
             "MEDIAS",
             "PIJAMA",
-            "CALZONES",
             "PAÑUELO",
             "TOALLA",
     };
@@ -52,7 +51,6 @@ public class Fragment_prendas extends Fragment {
             R.drawable.zapato_depor,
             R.drawable.medias,
             R.drawable.pijama,
-            R.drawable.calzones,
             R.drawable.panuelo,
             R.drawable.toalla,
     };
