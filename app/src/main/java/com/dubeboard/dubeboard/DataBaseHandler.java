@@ -30,6 +30,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_IMAGE = "image";
+    private static final String KEY_CATEGORY = "category";
 
     public DataBaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -39,7 +40,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_CATEGORY + " INTEGER,"
                 + KEY_IMAGE + " BLOB" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
@@ -64,6 +65,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, imagenes._name); // Contact Name
+        values.put(KEY_CATEGORY, imagenes._category); // Contact Name
         values.put(KEY_IMAGE, imagenes._image); // Contact Phone
 
         // Inserting Row
@@ -75,14 +77,20 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     Imagenes getContact(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_ID,
-                        KEY_NAME, KEY_IMAGE }, KEY_ID + "=?",
+        Cursor cursor = db.query(TABLE_CONTACTS, new String[]
+                        {
+                                KEY_ID,
+                                KEY_NAME,
+                                KEY_CATEGORY,
+                                KEY_IMAGE
+                        }
+                , KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
         Imagenes imagenes = new Imagenes(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getBlob(1));
+                cursor.getString(1), Integer.parseInt(cursor.getString(2)), cursor.getBlob(3));
 
         // return contact
         return imagenes;
@@ -93,7 +101,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     public List<Imagenes> getAllContacts() {
         List<Imagenes> contactList = new ArrayList<Imagenes>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM contacts ORDER BY name";
+        String selectQuery = "SELECT id, name, category, image FROM contacts ORDER BY name ASC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -103,7 +111,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 Imagenes imagenes = new Imagenes();
                 imagenes.setID(Integer.parseInt(cursor.getString(0)));
                 imagenes.setName(cursor.getString(1));
-                imagenes.setImage(cursor.getBlob(2));
+                imagenes.setCategory(Integer.parseInt(cursor.getString(2)));
+                imagenes.setImage(cursor.getBlob(3));
                 // Adding contact to list
                 contactList.add(imagenes);
             } while (cursor.moveToNext());
@@ -147,5 +156,4 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         // return count
         return cursor.getCount();
     }
-
 }

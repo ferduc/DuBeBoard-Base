@@ -7,6 +7,7 @@ public class Imagenes {
     // private variables
     int _id;
     String _name;
+    int _category;
     byte[] _image;
 
     // Empty constructor
@@ -15,11 +16,11 @@ public class Imagenes {
     }
 
     // constructor
-    public Imagenes(int keyId, String name, byte[] image) {
+    public Imagenes(int keyId, String name, int category, byte[] image) {
         this._id = keyId;
         this._name = name;
+        this._category = category;
         this._image = image;
-
     }
 
     // constructor
@@ -30,7 +31,6 @@ public class Imagenes {
 
     public Imagenes(int keyId) {
         this._id = keyId;
-
     }
 
     // getting ID
@@ -51,6 +51,16 @@ public class Imagenes {
     // setting name
     public void setName(String name) {
         this._name = name;
+    }
+
+    // getting Category
+    public int getCategory() {
+        return this._category;
+    }
+
+    // setting Category
+    public void setCategory(int category) {
+        this._category = category;
     }
 
     // getting phone number

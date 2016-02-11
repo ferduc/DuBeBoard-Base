@@ -124,11 +124,11 @@ public class Grabar extends Activity {
                         imageStream = new ByteArrayInputStream(imageName);
                         theImage = BitmapFactory.decodeStream(imageStream);
                         ImageView.setImageBitmap(theImage);
-
+/*
                         Intent intent = new Intent(Grabar.this, Fragmentuno.class);
                         intent.putExtra("imagename",theImage);
                         intent.putExtra("imageid",imageId); // pass your values and retrieve them in the other Activity using "imageid"
-                        startActivity(intent);
+                        startActivity(intent);*/
 
                     }
                     if(which == 1){
@@ -218,27 +218,7 @@ public class Grabar extends Activity {
                 Bundle extras = data.getExtras();
                 if(extras != null){
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    //guardamos en un string la Direccion en donde esta guardada
+                     //guardamos en un string la Direccion en donde esta guardada
                     //nuestra nueva foto
                     String dir = Environment.getExternalStorageDirectory()+ File.separator
                             + MEDIA_DIRECTORY + File.separator + TEMPORAL_PICTURE_NAME;
