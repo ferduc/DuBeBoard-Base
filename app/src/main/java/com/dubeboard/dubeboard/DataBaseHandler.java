@@ -124,6 +124,32 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
     }
 
+    public List<Imagenes> getAllContactsByCategory(int Category) {
+        List<Imagenes> contactList = new ArrayList<Imagenes>();
+        // Select All Query
+        String selectQuery = "SELECT id, name, category, image FROM contacts WHERE category = " + Category + " ORDER BY name ASC";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Imagenes imagenes = new Imagenes();
+                imagenes.setID(Integer.parseInt(cursor.getString(0)));
+                imagenes.setName(cursor.getString(1));
+                imagenes.setCategory(Integer.parseInt(cursor.getString(2)));
+                imagenes.setImage(cursor.getBlob(3));
+                // Adding contact to list
+                contactList.add(imagenes);
+            } while (cursor.moveToNext());
+        }
+        // close inserting data from database
+        db.close();
+        // return contact list
+        return contactList;
+
+    }
+
     // Updating single contact
     public int updateContact(Imagenes imagenes) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -136,6 +162,17 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         return db.update(TABLE_CONTACTS, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(imagenes.getID()) });
 
+    }
+
+    public int updateCategory(int category, String nombre) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_CATEGORY, category);
+
+        // updating row
+        return db.update(TABLE_CONTACTS, values, KEY_NAME + " = ?",
+                new String[] { String.valueOf(nombre) });
     }
 
     // Deleting single contact

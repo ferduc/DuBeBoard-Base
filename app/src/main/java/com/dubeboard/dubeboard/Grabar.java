@@ -25,6 +25,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class Grabar extends Activity {
     String valtxt;
     Button agimagen;
     private ImageView ImageView;
+    private EditText txtNombre;
     //final AlertDialog.Builder builder2;
 
     private Spinner spinner;
@@ -52,7 +54,9 @@ public class Grabar extends Activity {
     private static final int CAMERA_REQUEST = 1;
     private static final int PICK_FROM_GALLERY = 2;
     GridView dataList;
-    byte[] imageName;
+    String imageName;
+    int imageCategory;
+    byte[] imageFile;
     int imageId;
     Bitmap theImage;
     DataBaseHandler db;
@@ -70,6 +74,7 @@ public class Grabar extends Activity {
 
         dataList = (GridView) findViewById(R.id.list_base_datos);
         ImageView = (ImageView) findViewById(R.id.imView_imagen);
+        txtNombre = (EditText) findViewById(R.id.edtxt_nom_imagen);
         agimagen = (Button) findViewById(R.id.btn_agimagen);
         nom_imag = (EditText) findViewById(R.id.edtxt_nom_imagen);
 
@@ -80,7 +85,7 @@ public class Grabar extends Activity {
         */
 
         //---------------LEER LOS CONTACTOS DE LA BASE DE DATOS-----------------
-        List<Imagenes> imagenes = db.getAllContacts();
+        final List<Imagenes> imagenes = db.getAllContacts();
         for(Imagenes im : imagenes){
             String log = "ID:" + im.getID() + "Nombre: " + im.getName()
                     + " ,Imagen:" + im.getImage();
@@ -115,15 +120,21 @@ public class Grabar extends Activity {
                     if(which == 0){
 
 
-                        imageName = imageArry.get(position).getImage();
+                        imageFile = imageArry.get(position).getImage();
+                        imageName = imageArry.get(position).getName();
                         imageId = imageArry.get(position).getID();
+
+
 
                         Log.d("Antes enviar:****", imageName + "-" + imageId);
 
                         //CONVERTIR BYTE A BITMAP
-                        imageStream = new ByteArrayInputStream(imageName);
+                        imageStream = new ByteArrayInputStream(imageFile);
                         theImage = BitmapFactory.decodeStream(imageStream);
                         ImageView.setImageBitmap(theImage);
+
+                        //Poner el nombre de la imagen en el Edit Text
+                        txtNombre.setText(imageName);
 /*
                         Intent intent = new Intent(Grabar.this, Fragmentuno.class);
                         intent.putExtra("imagename",theImage);
@@ -133,13 +144,13 @@ public class Grabar extends Activity {
                     }
                     if(which == 1){
 
-                            imageName = imageArry.get(position).getImage();
+                            imageFile = imageArry.get(position).getImage();
                             imageId = imageArry.get(position).getID();
 
                             Log.d("Antes enviar:****", imageName + "-" + imageId);
 
                             //CONVERTIR BYTE A BITMAP
-                            imageStream = new ByteArrayInputStream(imageName);
+                            imageStream = new ByteArrayInputStream(imageFile);
                             theImage = BitmapFactory.decodeStream(imageStream);
                             Intent intent = new Intent(Grabar.this,
                                     DisplayImageActivity.class);
@@ -196,12 +207,13 @@ public class Grabar extends Activity {
         btn_grabar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String valorspinner = (String)spinner.getSelectedItem();
+                txtNombre = (EditText) findViewById(R.id.edtxt_nom_imagen);
+                String imageNameToUpdate = txtNombre.getText() + "";
                 if (valorspinner == "PRONOMBRES") {
-                    Toast.makeText(getBaseContext(), "asdsada", Toast.LENGTH_SHORT).show();
-
+                    db.updateCategory(1, imageNameToUpdate);
                 }
+                Toast.makeText(getBaseContext(), "Actualizada categoria de " + imageNameToUpdate, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -291,5 +303,4 @@ public class Grabar extends Activity {
         ImageView.setImageBitmap(bitmap);
 
     }
-
 }
